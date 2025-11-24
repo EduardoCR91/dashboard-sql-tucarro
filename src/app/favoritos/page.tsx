@@ -78,7 +78,7 @@ export default function Favorites() {
 
   if (!isLogged) {
     return (
-      <div className="flex flex-col items-center justify-center p-12 bg-white rounded-xl shadow-lg max-w-lg mx-auto mt-10">
+      <div className="flex flex-col items-center justify-center p-12 bg-white rounded-xl shadow-lg max-w-lg mx-auto mt-10 border-t-4 border-blue-500">
         <HeartIcon className="h-16 w-16 text-red-500 mb-4"/>
         <h1 className="text-2xl font-bold mb-3">Inicia Sesión para ver Favoritos</h1>
         <p className="text-gray-600 mb-6 text-center">
@@ -96,7 +96,7 @@ export default function Favorites() {
 
   return (
     <div>
-      <h1 className="text-3xl font-bold mb-6 text-red-600 flex items-center">
+      <h1 className="text-3xl font-bold mb-6 text-blue-600 flex items-center">
         <HeartIcon className="h-8 w-8 mr-3"/> Mis Vehículos Favoritos
       </h1>
       
@@ -120,11 +120,11 @@ export default function Favorites() {
                     alt={car.title}
                 />
                 <div className="flex-grow">
-                    <Link href={`/cars/${car.id}`} className="font-bold text-xl text-blue-800 hover:text-blue-600 transition">
+                    <Link href={`/cars/${car.id}`} className="font-bold text-xl text-black-800 hover:text-blue-600 transition">
                         {car.title} ({car.year})
                     </Link>
-                    <p className="text-gray-500 text-sm mb-1">{car.brand}</p>
-                    <p className="text-2xl font-extrabold text-green-600">${car.price.toLocaleString()}</p>
+                    <p className="text-black-500 text-sm mb-1">{car.brand}</p>
+                    <p className="text-2xl font-extrabold text-black-600">${car.price.toLocaleString()}</p>
                 </div>
                 <button 
                     onClick={() => removeFavorite(car.id)}

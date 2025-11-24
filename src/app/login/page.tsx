@@ -101,7 +101,7 @@ export default function AccountPage() {
   // VISTA 2: USUARIO NO AUTENTICADO (LOGIN / REGISTRO)
   // ----------------------------------------------------
   return (
-    <div className="max-w-md mx-auto mt-10 bg-white p-8 rounded-lg shadow-xl border-t-4 border-yellow-500">
+    <div className="max-w-md mx-auto mt-10 bg-white p-8 rounded-lg shadow-xl border-t-4 border-blue-500">
       <h2 className="text-3xl font-bold mb-6 text-center text-gray-800">
         {isLogin ? 'Iniciar Sesión' : 'Registrarse'}
       </h2>
@@ -122,7 +122,7 @@ export default function AccountPage() {
           onChange={e => setPassword(e.target.value)}
           required
         />
-        <button className="w-full bg-yellow-500 text-gray-900 font-bold py-3 rounded-lg hover:bg-yellow-400 transition text-lg">
+        <button className="w-full bg-blue-500 text-white font-bold py-3 rounded-lg hover:bg-blue-700 transition text-lg">
           {isLogin ? 'Entrar' : 'Crear Cuenta'}
         </button>
       </form>
