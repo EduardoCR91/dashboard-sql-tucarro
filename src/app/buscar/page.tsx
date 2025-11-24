@@ -1,98 +1,109 @@
-// app/buscar/page.tsx
 'use client'
-import { useState, useEffect } from 'react'
-import { useSearchParams } from 'next/navigation'
-import { supabase } from '../../../lib/supabase' // Asegúrate de que esta ruta sea correcta
+
+import { useState } from 'react'
+
+import { supabase } from '../../../lib/supabase'
+
 import Link from 'next/link'
 
-interface Car {
-    id: number;
-    title: string;
-    year: number;
-    price: number;
-    // Añade más campos según tu esquema de Supabase
+
+
+export default function Search() {
+
+const [query, setQuery] = useState('')
+
+const [brand, setBrand] = useState('')
+
+const [results, setResults] = useState<any[]>([])
+
+
+
+async function handleSearch(e: React.FormEvent) {
+
+e.preventDefault()
+
+let search = supabase.from('cars').select('*')
+
+
+
+if (query) search = search.ilike('title', `%${query}%`)
+
+if (brand) search = search.ilike('brand', `%${brand}%`)
+
+
+
+const { data } = await search
+
+if (data) setResults(data)
+
 }
 
-export default function SearchResultsPage() {
-  const searchParams = useSearchParams()
-  const [results, setResults] = useState<Car[]>([])
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState<string | null>(null)
 
-  // Obtenemos los parámetros de la URL
-  const query = searchParams.get('query') || ''
-  const brand = searchParams.get('brand') || ''
 
-  useEffect(() => {
-    async function fetchResults() {
-      setLoading(true)
-      setError(null)
+return (
 
-      try {
-        let search = supabase.from('cars').select('*')
+<div>
 
-        // Aplicamos los filtros de la URL
-        if (query) search = search.ilike('title', `%${query}%`)
-        if (brand) search = search.ilike('brand', `%${brand}%`)
+<h1 className="text-3xl font-bold mb-6">Buscar Vehículo</h1>
 
-        const { data, error: dbError } = await search
-        
-        if (dbError) {
-          throw new Error(dbError.message)
-        }
+<form onSubmit={handleSearch} className="bg-white p-6 rounded-lg shadow mb-8 flex gap-4 flex-wrap">
 
-        if (data) setResults(data as Car[])
+<input
 
-      } catch (e: any) {
-        setError(e.message)
-      } finally {
-        setLoading(false)
-      }
-    }
-    
-    // Solo busca si hay al menos un filtro o consulta
-    if (query || brand) {
-        fetchResults()
-    } else {
-        setLoading(false)
-        setResults([])
-    }
+type="text"
 
-  }, [query, brand]) // Se ejecuta cada vez que cambian la consulta o la marca
+placeholder="Ej: Corolla, Mazda 3..."
 
-  // --- Renderizado ---
-  
-  if (loading) {
-    return (
-      <div className="text-center p-8">
-        <p>Cargando resultados...</p>
-      </div>
-    )
-  }
-  
-  if (error) {
-      return <p className="text-red-500 p-8">Error al cargar resultados: {error}</p>
-  }
-  
-  const searchTitle = `Resultados para: "${query}" ${brand ? `(Marca: ${brand})` : ''}`
+className="border p-2 rounded flex-1"
 
-  return (
-    <div>
-      <h1 className="text-3xl font-bold mb-6">{searchTitle}</h1>
-      
-      {results.length === 0 && (
-          <p className="text-gray-500">No se encontraron vehículos que coincidan con tu búsqueda. Intenta con otros filtros.</p>
-      )}
+onChange={(e) => setQuery(e.target.value)}
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {results.map((car) => (
-          <Link href={`/cars/${car.id}`} key={car.id} className="block border p-4 rounded-lg hover:shadow-lg transition-shadow bg-white">
-             <h2 className="font-bold text-xl mb-1">{car.title}</h2>
-             <p className="text-gray-600">{car.year}</p>
-             <p className="text-2xl font-semibold mt-2">${car.price.toLocaleString('es-CO')}</p>
-          </Link>
-        ))}
-      </div>
-    </div>
-  )
+/>
+
+<select className="border p-2 rounded" onChange={(e) => setBrand(e.target.value)}>
+
+<option value="">Todas las marcas</option>
+<option value="Toyota">Toyota</option>
+<option value="Mazda">Mazda</option>
+<option value="Chevrolet">Chevrolet</option>
+<option value="Ford">Ford</option>
+<option value="Honda">Honda</option>
+<option value="Nissan">Nissan</option>
+<option value="Volkswagen">Volkswagen</option>
+<option value="Subaru">Subaru</option>
+<option value="Kia">Kia</option>
+<option value="Mercedes">Mercedes</option>
+<option value="Audi">Audi</option>
+<option value="Bmw">Bmw</option>
+
+</select>
+
+<button className="bg-blue-600 text-white px-6 py-2 rounded">Buscar</button>
+
+</form>
+
+
+
+<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+
+{results.map((car) => (
+
+<Link href={`/cars/${car.id}`} key={car.id} className="block border p-4 rounded hover:shadow-md bg-white">
+
+<h2 className="font-bold text-lg">{car.title}</h2>
+
+<p className="text-gray-500">{car.year} - ${car.price}</p>
+
+</Link>
+
+))}
+
+{results.length === 0 && <p className="text-gray-500">Ingresa filtros para buscar.</p>}
+
+</div>
+
+</div>
+
+)
+
 }
