@@ -1,5 +1,6 @@
 import './globals.css'
 import Link from 'next/link'
+import { MagnifyingGlassIcon } from '@heroicons/react/24/outline'
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
