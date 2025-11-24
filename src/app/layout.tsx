@@ -29,15 +29,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 className="p-2 px-4 rounded-l w-full focus:outline-none text-gray-700"
                 placeholder="Buscar vehículos..."
               />
-              <button type="submit" className="px-4 py-2 border-l border-gray-200 text-gray-500 hover:text-blue-600">
-                {/* Usamos el icono importado en lugar del emoji */}
-                <MagnifyingGlassIcon className="h-5 w-5" />
-              </button>
+              <Link href="/buscar" className="md:flex-1 md:max-w-xl">🔍</Link>
             </form>
 
             {/* SECCIÓN 3: ENLACES */}
             {/* En móviles permitimos scroll horizontal (overflow-x-auto) si hay muchos links, o wrap */}
             <div className="flex items-center gap-4 text-sm w-full md:w-auto justify-center flex-wrap">
+              <Link href="/buscar" className="hover:text-gray-700">Buscar</Link>
               <Link href="/login" className="hover:text-gray-700">Cuenta</Link>
               <Link href="/favoritos" className="hover:text-gray-700">Favoritos</Link>
               
