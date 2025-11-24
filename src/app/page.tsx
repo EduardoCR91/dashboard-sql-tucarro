@@ -111,7 +111,7 @@ export default function Home() {
 
   return (
     <div>
-      <h1 className="text-3xl font-bold mb-6 text-blue-800">Vehículos Recientes</h1>
+      <h1 className="text-3xl font-bold mb-6 text-black text-center">Vehículos Recientes</h1>
       
       {cars.length === 0 && page > 0 && (
           <p className="text-center text-gray-500 p-10">No hay más vehículos en esta página.</p>
@@ -146,16 +146,16 @@ export default function Home() {
                             </button>
                         </div>
                         
-                        <p className="text-gray-500 text-sm mb-3">
+                        <p className="text-black-500 text-sm mb-3">
                             {car.year} • {car.brand}
                         </p>
-                        <p className="text-3xl font-extrabold text-green-600">
+                        <p className="text-3xl font-extrabold text-black-600">
                             ${car.price.toLocaleString()}
                         </p>
 
                         <Link 
                             href={`/cars/${car.id}`} 
-                            className="mt-4 block text-center bg-blue-600 text-white font-medium py-2 rounded-lg hover:bg-blue-700 transition"
+                            className="mt-4 block text-center text-black font-medium py-2 rounded-lg hover:bg-blue-700 transition"
                         >
                             Ver Detalles
                         </Link>

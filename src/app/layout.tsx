@@ -5,14 +5,28 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="es">
       <body className="bg-gray-50 text-gray-900">
-        <nav className="bg-blue-900 text-white p-4 shadow-md">
+        <nav className="bg-yellow-300 text-black p-4 shadow-xl sticky top-0 z-10">
           <div className="container mx-auto flex justify-between items-center">
-            <Link href="/" className="text-2xl font-bold">CarMarket 🚗</Link>
+            <div className='mercado-libre'>
+              <Link href="/" className=" font-bold">mercado</Link>
+              <br />
+            <Link href="/" className=" font-bold">libre</Link>
+            </div>
+            <Link href="/" className="text-2xl font-bold">tucarro</Link>
+        <form  className="bg-white p-6 rounded-lg shadow mb-8 flex gap-4 flex-wrap">
+          <input 
+            type="text" 
+            className="border p-2 rounded flex-1"
+          />
+          <Link href="/buscar" className="px-4 py-2 ">🔍</Link>
+        </form>
             <div className="space-x-6">
-              <Link href="/publicar" className="hover:text-blue-200 bg-red-600 px-3 py-1 rounded">Vender!</Link> 
-              <Link href="/buscar" className="hover:text-blue-200">Buscar</Link>
-              <Link href="/favoritos" className="hover:text-blue-200">Favoritos</Link>
-              <Link href="/login" className="bg-blue-600 px-4 py-2 rounded hover:bg-blue-500">Cuenta</Link>
+              <Link href="/login" className="px-4 py-2 ">Cuenta</Link>
+      
+              <Link href="/buscar" className="hover:text-black-200">Buscar</Link>
+              <Link href="/favoritos" className="hover:text-black-200">Favoritos</Link>
+              <Link href="/publicar" className="hover:text-black text-stroke-black px-3 py-1 rounded">Publica tu vehiculo</Link> 
+              
             </div>
           </div>
         </nav>

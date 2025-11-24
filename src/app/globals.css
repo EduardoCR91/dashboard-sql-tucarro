@@ -24,3 +24,12 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+/* Esto define la utilidad personalizada en tu CSS global */
+.text-stroke-black {
+    /* El color interno del texto será blanco */
+    color: white; 
+    /* El trazo (borde) será de 1.5px y de color negro */
+    -webkit-text-stroke: 1.5px black; 
+    text-stroke: 1.5px black; /* para compatibilidad */
+}
