@@ -21,11 +21,20 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               <Link href="/" className="text-2xl font-bold">tucarro</Link>
             </div>
 
-            {/* SECCIÓN 2: BUSCADOR (Usamos el componente Searchbar) */}
-            <Searchbar />
+            {/* SECCIÓN 2: BUSCADOR */}
+            {/* Ajustado para que ocupe el ancho total en móvil (w-full) y se expanda en escritorio (md:flex-1) */}
+            <form className="bg-white rounded shadow flex w-full md:max-w-xl md:flex-1">
+              <input 
+                type="text" 
+                className="p-2 px-4 rounded-l w-full focus:outline-none text-gray-700"
+                placeholder="Buscar vehículos..."
+              />
+              <Link href="/buscar" className="md:flex-1 md:max-w-xl">🔍</Link>
+            </form>
 
             {/* SECCIÓN 3: ENLACES */}
             <div className="flex items-center gap-4 text-sm w-full md:w-auto justify-center flex-wrap">
+              <Link href="/buscar" className="hover:text-gray-700">Buscar</Link>
               <Link href="/login" className="hover:text-gray-700">Cuenta</Link>
               <Link href="/favoritos" className="hover:text-gray-700">Favoritos</Link>
               <Link 
